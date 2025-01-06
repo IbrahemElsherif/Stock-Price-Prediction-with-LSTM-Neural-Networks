@@ -32,6 +32,7 @@ def Model():
     ])
     return model
 ```
+![Model](https://github.com/IbrahemElsherif/Stock-Price-Prediction-with-LSTM-Neural-Networks/blob/master/Model%20Achitecture.png)
 
 ## 📊 Performance Metrics
 

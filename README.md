@@ -1,4 +1,6 @@
 # Stock Price Prediction using LSTM
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/16VWgV_IpY2OHp2Szi6sBoB1Qk1JH4uXq?usp=sharing)
+
 
 A deep learning project focused on predicting stock prices using LSTM (Long Short-Term Memory) neural networks. The model achieves a MAPE of 9.58% on test data, demonstrating good predictive capabilities for financial time series forecasting.
 
@@ -19,13 +21,14 @@ This project implements a time series prediction model for stock prices using se
 
 ```python
 def Model():
-    model = Sequential([
-        LSTM(200, input_shape=(5, 1), activation=tf.nn.leaky_relu, return_sequences=True),
-        LSTM(200, activation=tf.nn.leaky_relu),
-        Dense(200, activation=tf.nn.leaky_relu),
-        Dense(100, activation=tf.nn.leaky_relu),
-        Dense(50, activation=tf.nn.leaky_relu),
-        Dense(5, activation=tf.nn.leaky_relu)
+    model = Sequential([ 
+        LSTM(100, input_shape=(5, 1), activation='relu',  return_sequences=True, kernel_regularizer=regularizers.l2(0.01)),
+        Dropout(0.2),  
+        LSTM(50, activation='relu', kernel_regularizer=regularizers.l2(0.01)),
+        Dropout(0.2),
+        Dense(25, activation='relu',kernel_regularizer=regularizers.l2(0.01)),
+        BatchNormalization(), 
+        Dense(1)
     ])
     return model
 ```
@@ -43,13 +46,6 @@ The project includes comprehensive data preprocessing:
 - Train-test split based on dates
 - Custom dataset creation function
 
-```python
-def create_dataset(data, start_date, time_step=1):
-    scaler = MinMaxScaler(feature_range=(0, 1))
-    train_data = data['Adj. Close'][data['Date'] < start_date].to_numpy()
-    test_data = data['Adj. Close'][data['Date'] >= start_date].to_numpy()
-    # ... (sequence creation and scaling)
-```
 
 ## 📉 Learning Rate Schedule
 
@@ -71,11 +67,9 @@ matplotlib
 
 ### Installation
 ```bash
-git clone 
+git clone https://github.com/IbrahemElsherif/Stock-Price-Prediction-with-LSTM-Neural-Networks
 ```
-```colab
-githubtocolab.com
-```
+
 
 ### Usage
 ```python
@@ -110,10 +104,8 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📧 Contact
 
-Your Name - [your.email@example.com](mailto:your.email@example.com)
+Email: ebrahemelsherif666i@gmail.com
 
-Project Link: [https://github.com/yourusername/stock-price-prediction](https://github.com/yourusername/stock-price-prediction)
-
-
+LinkedIn: [Ibrahem Elsherif](https://www.linkedin.com/in/ebrahem-elsherif/)
 ---
 ⭐️ If you found this project helpful, please give it a star!
